@@ -1,14 +1,48 @@
-import json from "../data/dashboard/properties.json"
-import { useState } from "react"
+import AddPropertyForm from "../components/dashboard/AddPropertyForm";
+import propertiesJson from "../data/dashboard/properties.json"
+import { useEffect, useState } from "react"
 
 function DashboardPage(props) {
-    const [properties, setProperties] = useState(json)
-    console.log(properties)
+    function getInitialProperties() {
+        const items = JSON.parse(localStorage.getItem('properties'));
+        if (items) {
+            return items
+        } else {
+            return propertiesJson
+        }
+    }
+
+    function handleAddProperty(formData) {
+        console.log(formData)
+    }
+
+    const [properties, setProperties] = useState(() => getInitialProperties() );
+    useEffect(() => {
+        localStorage.setItem('properties', JSON.stringify(properties))
+    }, [properties])
+   
+    const [isFormVisible, setIsFormVisible] = useState(false);
+
     return (
         <>
             <h1>Dashboard</h1>
             <p>Welcome!</p>
             <button onClick={props.onLogout}>Logout</button>
+            <button onClick={() => setIsFormVisible(true)}>
+                Додати об'єкт
+            </button>
+            {isFormVisible && <AddPropertyForm onSubmit={handleAddProperty}/>} 
+
+            <h2>Список об'єктів:</h2>
+                <div className="divchik">
+                    {properties.map((property) => (
+                        <div key={property.id}>
+                            <p>Назва об'єкту: {property.name}</p>
+                            <p>Місто: {property.city}</p>
+                            <p>Адреса: {property.address}</p>
+                        </div>
+                    ))}
+            </div>
         </>
     )
 }
