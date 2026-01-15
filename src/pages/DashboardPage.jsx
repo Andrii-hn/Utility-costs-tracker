@@ -13,7 +13,24 @@ function DashboardPage(props) {
     }
 
     function handleAddProperty(formData) {
-        console.log(formData)
+        let newId;
+        if (properties.length === 0) {
+            newId = 1;
+        } else {
+            let lastProperty = properties[properties.length - 1]
+            newId = lastProperty.id + 1;
+        }
+
+        let id = newId;
+        let createdAt = new Date().toISOString();  
+
+        let newProperty = {
+            id,
+            ...formData,
+            createdAt
+        }
+        setProperties(prev => [...prev, newProperty])
+        setIsFormVisible(false)
     }
 
     const [properties, setProperties] = useState(() => getInitialProperties() );
@@ -31,7 +48,8 @@ function DashboardPage(props) {
             <button onClick={() => setIsFormVisible(true)}>
                 Додати об'єкт
             </button>
-            {isFormVisible && <AddPropertyForm onSubmit={handleAddProperty}/>} 
+
+            {isFormVisible && <AddPropertyForm onSubmit={handleAddProperty} onCancel={() => setIsFormVisible(false)}/>} 
 
             <h2>Список об'єктів:</h2>
                 <div className="divchik">

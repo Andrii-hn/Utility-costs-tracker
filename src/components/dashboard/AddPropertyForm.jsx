@@ -1,15 +1,24 @@
 import { useState } from "react"
 
-function AddPropertyForm({ onSubmit }) {
+function AddPropertyForm({ onSubmit, onCancel }) {
     const [name, setName] = useState("")
     const [city, setCity] = useState("")
     const [address, setAddress] = useState("")
+
+    const isSubmitDisabled = !name.trim() || !city.trim() || !address.trim()
+
+    function resetForm() {
+        setName("")
+        setCity("")
+        setAddress("")
+    }
 
     return <>
         <h1>Додайте новий об'єкт</h1>
         <form onSubmit={(event) => {
             event.preventDefault()
             onSubmit({ name, city, address })
+            resetForm()
             }}>
 
             <label htmlFor="">Назва: </label>
@@ -19,8 +28,11 @@ function AddPropertyForm({ onSubmit }) {
             <label htmlFor="">Адреса: </label>
             <input type="text" value={address} onChange={(event) => setAddress(event.target.value)} /> <br />
 
-            <button type="submit">Зберегти</button>
-            <button type="button">Скасувати</button>
+            <button type="submit" disabled={isSubmitDisabled}>Зберегти</button>
+            <button type="button" onClick={() => {
+                resetForm() 
+                onCancel()
+                }}>Скасувати</button>
         </form>
     </>
 }
