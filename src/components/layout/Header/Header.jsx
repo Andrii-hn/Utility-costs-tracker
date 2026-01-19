@@ -1,6 +1,13 @@
+import { Navigate } from "react-router-dom"
+import { useLocation } from "react-router-dom";
 import styles from "./Header.module.css"
 
 function Header({ onLoginClick }) {
+  const authPages = ["/login", "/register"];
+  const path = useLocation();
+  const pathname = path.pathname;
+  const isAuthPage = authPages.includes(pathname);
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -8,11 +15,7 @@ function Header({ onLoginClick }) {
           Bills & Costs
         </div>
 
-        <button
-          className={styles.loginButton}
-          onClick={onLoginClick}>
-            Увійти
-        </button>
+        {!isAuthPage && <button className={styles.loginButton} onClick={onLoginClick}>Увійти</button>}
       </div>
     </header>
   )
