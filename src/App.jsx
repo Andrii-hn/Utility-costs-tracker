@@ -5,7 +5,9 @@ import LandingPage from "./pages/LandingPage/LandingPage"
 import LoginPage from "./pages/Auth/LoginPage"
 import RegistrationPage from "./pages/Auth/RegistrationPage"
 import DashboardPage from './pages/DashboardPage'
+
 import PublicLayout from './components/layout/PublicLayout/PublicLayout'
+import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout'
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -49,10 +51,8 @@ function App() {
 
   const handleRegister = (email, password) => {
     const newUser = { email, password };
-
     localStorage.setItem("user", JSON.stringify(newUser))
     localStorage.setItem("isAuth", "true")
-
     setUser(newUser);
     setIsAuthenticated(true);
   }
@@ -64,33 +64,54 @@ function App() {
   }
 
   return (
-        <Routes>
-        <Route path="/" element={
-          <PublicLayout onLoginClick={handleLoginClick}>
-            <LandingPage />
-          </PublicLayout> 
-        } />
-        <Route path="/login" element={
-          isAuthenticated ? ( 
-          <Navigate to="/dashboard" /> 
-          ) : (
-          <PublicLayout>
-            <LoginPage onLogin={handleLogin} />
-          </PublicLayout>
-        )} />
-        <Route path="/register" element={
-          isAuthenticated ? ( 
-          <Navigate to="/dashboard" /> 
-          ) : (
-          <PublicLayout>
-            <RegistrationPage onRegister={handleRegister} />
-          </PublicLayout>
-        )} />
-        <Route path='/dashboard' element={
-          (isAuthenticated)
-          ? <DashboardPage onLogout={handleLogout}/>
-          : <Navigate to="/login" />
-        } />
+      <Routes>
+        {/* Public */}
+        <Route 
+          path="/"  
+          element={
+            <PublicLayout onLoginClick={handleLoginClick}>
+              <LandingPage />
+            </PublicLayout> 
+          } 
+        />
+        <Route 
+          path="/login" 
+          element={
+            isAuthenticated ? ( 
+              <Navigate to="/dashboard" /> 
+            ) : (
+              <PublicLayout>
+                <LoginPage onLogin={handleLogin} />
+              </PublicLayout>
+            )
+          } 
+        />
+        <Route 
+          path="/register" 
+          element={
+            isAuthenticated ? ( 
+              <Navigate to="/dashboard" /> 
+            ) : (
+              <PublicLayout>
+                <RegistrationPage onRegister={handleRegister} />
+              </PublicLayout>
+            )
+          } 
+        />
+
+        {/* Protected Dashboard */}
+        <Route 
+          path='/dashboard' 
+          element={
+            isAuthenticated ? ( 
+              <DashboardLayout onLogout={handleLogout} user={user} />
+            ) : (   
+              <Navigate to="/login" />
+            )
+          } 
+        >
+          <Route index element={<DashboardPage />} />
+        </Route>
       </Routes>
   )
 }

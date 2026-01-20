@@ -1,0 +1,12 @@
+.root {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.userArea {
+  display: flex;
+  align-items: center;
+  gap: 1611px;
+}
