@@ -4,7 +4,7 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 import LandingPage from "./pages/LandingPage/LandingPage"
 import LoginPage from "./pages/Auth/LoginPage"
 import RegistrationPage from "./pages/Auth/RegistrationPage"
-import DashboardPage from './pages/DashboardPage'
+import DashboardPage from './pages/DashboardPage/DashboardPage'
 
 import PublicLayout from './components/layout/PublicLayout/PublicLayout'
 import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout'

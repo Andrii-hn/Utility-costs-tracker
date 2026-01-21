@@ -16,15 +16,15 @@ function Sidebar() {
       <nav className={styles.nav}>
         <NavLink to="/dashboard" end className={linkClass}>
           <LayoutDashboard size={18} />
-          Overview
+          Огляд
         </NavLink>
         <NavLink to="/dashboard/properties" className={linkClass}>
           <Home size={18} />
-          Properties
+          Об'єкти нерухомості
         </NavLink>
         <NavLink to="/dashboard/costs" className={linkClass}>
           <Receipt size={18} />
-          Costs
+          Комунальні витрати
         </NavLink>
       </nav>
     </aside>
