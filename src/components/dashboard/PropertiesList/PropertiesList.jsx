@@ -3,7 +3,7 @@ import PropertyItem from "../PropertyItem/PropertyItem";
 
 import styles from "./PropertiesList.module.css"
 
-function PropertiesList({ properties }) {
+function PropertiesList({ properties, onOpen }) {
   const [expandedPropertyId, setExpandedPropertyId] = useState(null)
   
   function handleToggle(id) {
@@ -21,6 +21,7 @@ function PropertiesList({ properties }) {
                 property={property}
                 isExpanded={expandedPropertyId === property.id}
                 onToggle={() => handleToggle(property.id)}
+                onOpen={onOpen ? () => onOpen(property.id) : undefined}
             />
         ))}  
       </div>        
@@ -29,15 +30,3 @@ function PropertiesList({ properties }) {
 }
 
 export default PropertiesList
-
-
-// <div>
-//         {properties.map((property) => (
-//           <div key={property.id} onClick={
-//             () => handleToggle(property.id)}>
-//             <p>{property.name}</p>
-//             <p>{property.city}</p>
-//             <p>{property.address}</p>
-//           </div>
-//         ))}
-//       </div>

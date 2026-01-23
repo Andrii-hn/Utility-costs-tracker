@@ -5,7 +5,7 @@ import Header from "./DashboardHeader/Header"
 
 import styles from "./DashboardLayout.module.css"
 
-function DashboardLayout({ onLogout, user }) {
+function DashboardLayout({ onLogout, user, properties, setProperties }) {
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
@@ -16,7 +16,7 @@ function DashboardLayout({ onLogout, user }) {
             <Header onLogout={onLogout} user={user}/>
         </div>
         <main className={styles.content}>
-            <Outlet />
+            <Outlet context={{ user, properties, setProperties}} />
         </main>
       </div>
     </div>

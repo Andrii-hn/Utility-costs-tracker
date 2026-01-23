@@ -1,6 +1,6 @@
 import styles from "./PropertyItem.module.css"
 
-function PropertyItem({ property, isExpanded, onToggle }) {
+function PropertyItem({ property, isExpanded, onToggle, onOpen }) {
   function formatDate(isoString) {
     return new Date(isoString).toLocaleDateString("uk-UA");
   }
@@ -11,6 +11,12 @@ function PropertyItem({ property, isExpanded, onToggle }) {
           <p className={styles.name}>{property.name}</p>
           <p className={styles.location}>{property.city}, {property.address}</p>
         </div>
+
+        {onOpen && ( 
+          <div>
+            <button onClick={onOpen}>Відкрити</button>
+          </div>
+        )}
 
         {isExpanded && (
           <div className={styles.expanded}>

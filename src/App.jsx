@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
+
+import propertiesJson from "./data/dashboard/properties.json"
 
 import LandingPage from "./pages/LandingPage/LandingPage"
 import LoginPage from "./pages/Auth/LoginPage"
@@ -10,6 +12,15 @@ import PublicLayout from './components/layout/PublicLayout/PublicLayout'
 import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout'
 
 function App() {
+  const [properties, setProperties] = useState(() => {
+    const stored = localStorage.getItem("properties");
+    return stored ? JSON.parse(stored) : propertiesJson;
+  });
+
+  useEffect(() => {
+      localStorage.setItem("properties", JSON.stringify(properties));
+  }, [properties]);
+
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
     return savedUser ? JSON.parse(savedUser) : null;
@@ -104,7 +115,12 @@ function App() {
           path='/dashboard' 
           element={
             isAuthenticated ? ( 
-              <DashboardLayout onLogout={handleLogout} user={user} />
+              <DashboardLayout 
+                onLogout={handleLogout} 
+                user={user}
+                properties={properties}
+                setProperties={setProperties}
+              />
             ) : (   
               <Navigate to="/login" />
             )

@@ -18,13 +18,13 @@ function Sidebar() {
           <LayoutDashboard size={18} />
           Огляд
         </NavLink>
-        <NavLink to="/dashboard/properties" className={linkClass}>
+        <NavLink to="/dashboard/settings" className={linkClass}>
           <Home size={18} />
-          Об'єкти нерухомості
+          Налаштування послуг
         </NavLink>
-        <NavLink to="/dashboard/costs" className={linkClass}>
+        <NavLink to="/dashboard/" className={linkClass}>
           <Receipt size={18} />
-          Комунальні витрати
+          {/* Комунальні витрати */}
         </NavLink>
       </nav>
     </aside>

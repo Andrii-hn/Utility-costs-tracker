@@ -1,21 +1,14 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import { useOutletContext } from "react-router-dom";
 
 import AddPropertyForm from "../../components/dashboard/AddPropertyForm/AddPropertyForm";
-import propertiesJson from "../../data/dashboard/properties.json"
 import PageHeader from "../../components/dashboard/PageHeader/PageHeader";
 
 import styles from "./DashboardPage.module.css"
 import PropertiesList from "../../components/dashboard/PropertiesList/PropertiesList";
 
-function DashboardPage(props) {
-  function getInitialProperties() {
-    const items = JSON.parse(localStorage.getItem('properties'));
-    if (items) {
-      return items
-    } else {
-      return propertiesJson
-    }
-  }
+function DashboardPage() {
+  const { properties, setProperties } = useOutletContext(); 
 
   function handleAddProperty(formData) {
     let newId;
@@ -32,17 +25,13 @@ function DashboardPage(props) {
     let newProperty = {
       id,
       ...formData,
-      createdAt
+      createdAt,
+      costs: []
     }
     setProperties(prev => [...prev, newProperty])
     setIsModalOpen(false)
   }
 
-  const [properties, setProperties] = useState(() => getInitialProperties() );
-    useEffect(() => {
-      localStorage.setItem('properties', JSON.stringify(properties))
-    }, [properties])
-   
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   function handleOverlayClick(event) {
@@ -64,17 +53,6 @@ function DashboardPage(props) {
           </div>
         </div>
       } 
-
-      {/* <h2>Список об'єктів:</h2>
-      <div className="divchik">
-        {properties.map((property) => (
-          <div key={property.id}>
-            <p>Назва об'єкту: {property.name}</p>
-            <p>Місто: {property.city}</p>
-            <p>Адреса: {property.address}</p>
-          </div>
-        ))}
-      </div> */}
 
       <PropertiesList properties={properties}/>
     </>
