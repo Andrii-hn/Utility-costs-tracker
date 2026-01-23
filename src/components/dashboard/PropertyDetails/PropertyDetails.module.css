@@ -1,0 +1,23 @@
+.card {
+  max-width: 640px;
+  background-color: white;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.location {
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.meta {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}

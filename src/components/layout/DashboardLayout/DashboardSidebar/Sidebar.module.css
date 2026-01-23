@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 24px 16px;
+  padding: 20px;
 }
 
 .brand {
@@ -12,7 +12,7 @@
   margin-bottom: 40px;
   text-decoration: none;
   line-height: 1.2;
-  cursor: default;
+  cursor: pointer;
 }
 
 .brand a {
@@ -23,6 +23,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 124px;
 }
 
 .active {
@@ -49,4 +50,67 @@
 
 .link svg {
   color: inherit;
+}
+
+/* {Список} */
+.container {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+.properties {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.item {
+  padding: 12px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.15s ease;
+}
+
+.item:hover {
+  background: #f3f4f6;
+}
+
+.itemActive {
+  background-color: #e0e7ff;
+  color: #1e3a8a;
+  font-weight: 500;
+}
+
+.addButton {
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.addButton:hover {
+  background-color: #4338ca;
 }
