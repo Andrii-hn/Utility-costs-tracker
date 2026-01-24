@@ -77,7 +77,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
-  color: #6b7280;
+  color: #7f8082;
   margin-bottom: 20px;
 }
 
@@ -95,7 +95,7 @@
 
 .itemActive {
   background-color: #e0e7ff;
-  color: #1e3a8a;
+  color: #374151;
   font-weight: 500;
 }
 

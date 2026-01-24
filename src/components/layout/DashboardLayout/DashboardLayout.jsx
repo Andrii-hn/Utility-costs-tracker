@@ -6,6 +6,7 @@ import Header from "./DashboardHeader/Header"
 import AddPropertyForm from "../../dashboard/AddPropertyForm/AddPropertyForm"
 
 import styles from "./DashboardLayout.module.css"
+import Modal from "./Modal/Modal"
 
 function DashboardLayout({ onLogout, user, properties, setProperties }) {
   const [selectedPropertyId, setSelectedPropertyId] = useState(null)
@@ -42,6 +43,9 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
     setSelectedPropertyId(newId)
   }
 
+  // { SettingsPage }
+  const services = []
+
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
@@ -62,23 +66,18 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
             <Outlet context={{
               properties,
               selectedPropertyId,
-              onOpenAddProperty
+              onOpenAddProperty,
+              services
             }}/>
         </main>
 
         {isAddPropertyModalOpen && (
-          <div className={styles.overlay} onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setIsAddPropertyModalOpen(false);
-            }
-          }}>
-            <div className={styles.modal}>
-              <AddPropertyForm 
-                onSubmit={onCreateProperty}
-                onCancel={() => setIsAddPropertyModalOpen(false)} 
-              />
-            </div>
-          </div>
+          <Modal onClose={() => setIsAddPropertyModalOpen(false)}>
+            <AddPropertyForm 
+              onSubmit={onCreateProperty}
+              onCancel={() => setIsAddPropertyModalOpen(false)}
+            />
+          </Modal>
         )}
       </div>
     </div>

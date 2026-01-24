@@ -1,9 +1,24 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .card {
   max-width: 640px;
   background-color: white;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+.header {
+  margin-bottom: 16px;
 }
 
 .title {
@@ -20,4 +35,13 @@
 .meta {
   font-size: 0.9rem;
   color: #9ca3af;
+}
+
+.placeholder {
+  max-width: 42rem;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  color: #6b7280;
+  font-size: 1rem;
 }

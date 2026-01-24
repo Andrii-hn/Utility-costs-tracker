@@ -7,6 +7,7 @@ import LandingPage from "./pages/LandingPage/LandingPage"
 import LoginPage from "./pages/Auth/LoginPage"
 import RegistrationPage from "./pages/Auth/RegistrationPage"
 import DashboardPage from './pages/DashboardPage/DashboardPage'
+import SettingsPage from './pages/SettingsPage/SettingsPage'
 
 import PublicLayout from './components/layout/PublicLayout/PublicLayout'
 import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout'
@@ -60,8 +61,8 @@ function App() {
     setIsAuthenticated(true);
   }
 
-  const handleRegister = (email, password) => {
-    const newUser = { email, password };
+  const handleRegister = (fname, lname, email, password) => {
+    const newUser = {fname, lname, email, password };
     localStorage.setItem("user", JSON.stringify(newUser))
     localStorage.setItem("isAuth", "true")
     setUser(newUser);
@@ -127,6 +128,7 @@ function App() {
           } 
         >
           <Route index element={<DashboardPage />} />
+          <Route path='/dashboard/settings' element={<SettingsPage />} />
         </Route>
       </Routes>
   )

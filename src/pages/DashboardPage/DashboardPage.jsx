@@ -10,12 +10,12 @@ function DashboardPage() {
   if (selectedPropertyId === null) {
     return (
       <div className={styles.empty}>
-        <p className={styles.emoji}>🏠</p>
-        <p className={styles.hint}>Оберіть об'єкт у з колонки</p>
-        <span className={styles.or}>або</span>
+        <div className={styles.emoji}>🏠</div>
+        <h2 className={styles.title}>Об'єкт не обрано</h2>
+        <p className={styles.hint}>Оберіть об'єкт у з колонки або створіть новий</p>
         <button
           className={styles.primaryButton}
-          onClick={() => onOpenAddProperty(true)}>Створіть новий</button>
+          onClick={() => onOpenAddProperty(true)}>Створити об'єкт</button>
       </div>
     )
   }

@@ -4,6 +4,8 @@ import styles from "./Auth.module.css"
 import { Link } from "react-router-dom";
 
 function RegistrationPage({ onRegister }) {
+  const [fname, setFName] = useState("")
+  const [lname, setLName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -32,15 +34,19 @@ function RegistrationPage({ onRegister }) {
             setError(errorMessage);
             return
           } else {
-            onRegister(email, password)
+            onRegister(fname, lname, email, password)
           }
           
           }
         }>
+          <label>Ім'я</label>
+          <input type="text" value={fname} onChange={(event) => setFName(event.target.value)}/>
+          <label>Прізвище</label>
+          <input type="text" value={lname} onChange={(event) => setLName(event.target.value)}/>
           <label>Email: </label>
-          <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} /> <br />
+          <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} /> 
           <label>Password: </label>
-          <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} /> <br />
+          <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} /> 
           <button type="submit">Зареєструватися</button>
         </form>
 
