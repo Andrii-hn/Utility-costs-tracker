@@ -6,7 +6,7 @@ function SettingsHeader({ onOpenAddService }) {
       <h1 className={styles.title}>Налаштування комунальних послуг</h1>
       <button 
         className={styles.button} 
-        // onClick={onOpenAddService}
+        onClick={onOpenAddService}
       >
         Додати послугу
       </button>

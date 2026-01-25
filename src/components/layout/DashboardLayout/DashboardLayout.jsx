@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Outlet } from "react-router-dom"
 
 import Sidebar from "./DashboardSidebar/Sidebar"
@@ -35,8 +35,7 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
     let newProperty = {
       id,
       ...formData,
-      createdAt,
-      costs: []
+      createdAt
     }
     setProperties(prev => [...prev, newProperty])
     setIsAddPropertyModalOpen(false)
@@ -44,7 +43,34 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
   }
 
   // { SettingsPage }
-  const services = []
+  const [ services, setServices ] = useState(() => {
+    const stored = localStorage.getItem("services");
+    return stored ? JSON.parse(stored) : []
+  });
+
+  useEffect (() => {
+    localStorage.setItem("services", JSON.stringify(services));
+  }, [services]);
+
+  function onCreateService(formServiceData) {
+    let newId;
+    if (services.length === 0) {
+      newId = 1;
+    } else {
+      let lastService = services[services.length - 1];
+      newId = lastService.id + 1;
+    }
+    let id = newId;
+    let createdAt = new Date().toISOString();
+
+    let newService = {
+      id, 
+      ...formServiceData,
+      createdAt
+    }
+
+    setServices(prev => [...prev, newService])
+  }
 
   return (
     <div className={styles.layout}>
@@ -67,7 +93,8 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
               properties,
               selectedPropertyId,
               onOpenAddProperty,
-              services
+              services,
+              onCreateService
             }}/>
         </main>
 

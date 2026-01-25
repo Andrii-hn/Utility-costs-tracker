@@ -1,17 +1,32 @@
 .root {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  width: 100%;
+  max-width: 28rem;
+  background-color: #ffffff;
+  border-radius: 16px;
   padding: 24px;
   box-shadow: 
     0 10px 25px rgba(0, 0, 0, 0.08),
     0 4px 10px rgba(0, 0, 0, 0.04);
 }
 
+/* === Header === */
+
+.header {
+  margin-bottom: 20px;
+}
+
 .title {
-  font-size: 1.5rem;
+  font-size: 20px;
   font-weight: 600;
   color: #111827;
+}
+
+/* === Content === */ 
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .field {
@@ -21,23 +36,43 @@
 }
 
 .label {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
+  font-weight: 500;
   color: #374151;
 }
+
+/* === Input === */
 
 .input {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #d1d5db;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .input:focus {
-  outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 2px #4f46e5;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
 }
+
+/* === Checkbox === */
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #4f46e5;
+  cursor: pointer;
+}
+
+/* === Actions === */
 
 .actions {
   display: flex;
@@ -46,12 +81,15 @@
   margin-top: 8px;
 }
 
+/* === Cancel === */
+
 .cancel {
-  background-color: transparent;
-  border: 1px solid #d1d5db;
-  color: #374151;
   padding: 8px 14px;
   border-radius: 8px;
+  background-color: transparent;
+  border: 1px solid #d1d5db;
+  font-size: 0.875rem;
+  color: #374151;
   cursor: pointer;
   transition: background-color 0.15s ease;
 }
@@ -60,19 +98,21 @@
   background-color: #f3f4f6;
 }
 
+/* === Submit === */
+
 .submit {
-  background-color: #4f46e5;
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border: none;
   padding: 8px 16px;
   border-radius: 8px;
+  background-color: #4f46e5;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
   cursor: pointer;
   transition: background-color 0.15s ease;
 }
 
-.submit:hover {
+.submit:hover:not(:disabled) {
   background-color: #4338ca;
 }
 
