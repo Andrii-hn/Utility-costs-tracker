@@ -1,0 +1,76 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 30px;
+  border-radius: 12px;
+  background-color: #f9fafb;
+  transition: background-color 0.15s ease;
+}
+
+.row:hover {
+  background-color: #f3f4f6;
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 12px;
+  font-size: 0.8rem;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.checkbox label {
+  font-weight: 500;
+  cursor: default;
+}
+
+.checkbox input {
+  width: 15px;
+  height: 15px;
+  accent-color: #4f46e5;
+  cursor: default;
+}
+
+.updateButton {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  background-color: #eef3ff;;
+  color: #3630a3;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.updateButton:hover {
+  background-color: #e0e7ff;
+}
+
+.deleteButton {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.deleteButton:hover {
+  background-color: #fecaca;
+}

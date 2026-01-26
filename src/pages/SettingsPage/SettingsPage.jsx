@@ -6,6 +6,7 @@ import AddServiceForm from "../../components/settings/AddServiceForm/AddServiceF
 
 import styles from "./SettingsPage.module.css"
 import Modal from "../../components/layout/DashboardLayout/Modal/Modal"
+import ServicesList from "../../components/settings/ServicesList/ServicesList"
 
 function SettingsPage() {
   const { services, onCreateService } = useOutletContext()
@@ -13,6 +14,11 @@ function SettingsPage() {
 
   function onOpenAddService() {
     setIsAddServiceModalOpen(true)
+  }
+
+  function handleCreateService(formData) {
+    onCreateService(formData)
+    setIsAddServiceModalOpen(false)
   }
 
   return (
@@ -30,13 +36,13 @@ function SettingsPage() {
         </div>
       </div>
       ) : (
-        <div>List</div>
+        <ServicesList services={services} />
       )}
 
       {isAddServiceModalOpen && (
         <Modal onClose={() => setIsAddServiceModalOpen(false)}> 
           <AddServiceForm 
-            onSubmit={onCreateService}
+            onSubmit={handleCreateService}
             onCancel={() => setIsAddServiceModalOpen(false)} 
             />
         </Modal>

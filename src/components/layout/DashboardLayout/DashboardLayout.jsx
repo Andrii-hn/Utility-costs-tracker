@@ -70,6 +70,7 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
     }
 
     setServices(prev => [...prev, newService])
+    setIsAddPropertyModalOpen(false)
   }
 
   return (
