@@ -2,7 +2,7 @@ import ServiceItem from "../ServiceItem/ServiceItem"
 
 import styles from "./ServicesList.module.css"
 
-function ServicesList({ services }) {
+function ServicesList({ services, onRequestDelete, onRequestEdit }) {
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Доступні послуги</h2>
@@ -12,6 +12,8 @@ function ServicesList({ services }) {
           <ServiceItem 
             key={service.id}
             service={service}
+            onRequestDelete={onRequestDelete}
+            onRequestEdit={onRequestEdit}
           />
         ))}
       </div>

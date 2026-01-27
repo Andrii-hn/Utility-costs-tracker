@@ -3,14 +3,20 @@ import { useOutletContext } from "react-router-dom"
 
 import SettingsHeader from "../../components/settings/SettingsHeader/SettingsHeader"
 import AddServiceForm from "../../components/settings/AddServiceForm/AddServiceForm"
+import ServicesList from "../../components/settings/ServicesList/ServicesList"
+import Modal from "../../components/layout/DashboardLayout/Modal/Modal"
+import ConfirmDeleteService from "../../components/settings/ConfirmDeleteService/ConfirmDeleteService"
 
 import styles from "./SettingsPage.module.css"
-import Modal from "../../components/layout/DashboardLayout/Modal/Modal"
-import ServicesList from "../../components/settings/ServicesList/ServicesList"
 
 function SettingsPage() {
-  const { services, onCreateService } = useOutletContext()
+  const { services, onCreateService, onDeleteService, onUpdateService } = useOutletContext()
   const [ isAddServiceModalOpen, setIsAddServiceModalOpen ] = useState(false)
+
+  const [ editingService, setEditingService ] = useState(null)
+
+  const [ serviceIdToDelete, setServiceIdToDelete ] = useState(null)
+  const [ isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   function onOpenAddService() {
     setIsAddServiceModalOpen(true)
@@ -19,6 +25,25 @@ function SettingsPage() {
   function handleCreateService(formData) {
     onCreateService(formData)
     setIsAddServiceModalOpen(false)
+  }
+
+  function onRequestDelete(id) {
+    setServiceIdToDelete(id)
+    setIsDeleteModalOpen(true)
+  }
+
+  function onRequestEdit(service) {
+    setEditingService(service)
+  }
+
+  function handleEditService(formData) {
+    const updatedService = {
+      ...editingService,
+      ...formData
+    };
+
+    onUpdateService(updatedService);
+    setEditingService(null);
   }
 
   return (
@@ -36,7 +61,11 @@ function SettingsPage() {
         </div>
       </div>
       ) : (
-        <ServicesList services={services} />
+        <ServicesList 
+          services={services} 
+          onRequestDelete={onRequestDelete} 
+          onRequestEdit={onRequestEdit}
+          />
       )}
 
       {isAddServiceModalOpen && (
@@ -44,6 +73,26 @@ function SettingsPage() {
           <AddServiceForm 
             onSubmit={handleCreateService}
             onCancel={() => setIsAddServiceModalOpen(false)} 
+            />
+        </Modal>
+      )}
+
+      {editingService && (
+        <Modal onClose={() => setEditingService(null)}>
+          <AddServiceForm
+            initialData={editingService}
+            onSubmit={handleEditService}
+            onCancel={() => setEditingService(null)}
+          />
+        </Modal>
+      )}
+
+      {isDeleteModalOpen && (
+        <Modal onClose={() => setIsDeleteModalOpen(false)}>
+          <ConfirmDeleteService 
+            serviceIdToDelete={serviceIdToDelete}
+            onCancel={() => setIsDeleteModalOpen(false)}
+            onConfirm={(id) => onDeleteService(id)}
             />
         </Modal>
       )}

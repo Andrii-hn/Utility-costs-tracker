@@ -73,6 +73,20 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
     setIsAddPropertyModalOpen(false)
   }
 
+  function onDeleteService(id) {
+    setServices(prev => prev.filter((service) => service.id != id));
+  }
+
+  function onUpdateService(updatedService) {
+    setServices(prevServices => 
+      prevServices.map(service =>
+        service.id === updatedService.id
+          ? { ...service, ...updatedService }
+          : service
+      )
+    );
+  }
+
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
@@ -95,7 +109,9 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
               selectedPropertyId,
               onOpenAddProperty,
               services,
-              onCreateService
+              onCreateService,
+              onDeleteService,
+              onUpdateService
             }}/>
         </main>
 

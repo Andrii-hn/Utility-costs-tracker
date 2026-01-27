@@ -2,9 +2,9 @@ import { useState } from "react"
 
 import styles from "./AddServiceForm.module.css"
 
-function AddServiceForm({ onSubmit, onCancel }) {
-  const [ name, setName ] = useState("")
-  const [ hasMeter, setHasMeter ] = useState(true)
+function AddServiceForm({ initialData = null, onSubmit, onCancel }) {
+  const [ name, setName ] = useState(initialData?.name ?? "");
+  const [ hasMeter, setHasMeter ] = useState(initialData?.hasMeter ?? true);
 
   const isSubmitDisabled = !name.trim();
 
@@ -22,7 +22,7 @@ function AddServiceForm({ onSubmit, onCancel }) {
           resetForm()
         }}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Додати комунальну послугу</h1>
+          <h1 className={styles.title}>{initialData ? "Редагувати послугу" : "Додати комунальну послугу"}</h1>
         </div>
         
         <div className={styles.main}>
