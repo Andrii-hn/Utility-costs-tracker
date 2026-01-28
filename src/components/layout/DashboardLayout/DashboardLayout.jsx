@@ -9,12 +9,7 @@ import styles from "./DashboardLayout.module.css"
 import Modal from "./Modal/Modal"
 
 function DashboardLayout({ onLogout, user, properties, setProperties }) {
-  const [selectedPropertyId, setSelectedPropertyId] = useState(null)
   const [isAddPropertyModalOpen, setIsAddPropertyModalOpen] = useState(false)
-
-  function onSelectProperty(propertyId) {
-    setSelectedPropertyId(propertyId)
-  }
 
   function onOpenAddProperty() {
     setIsAddPropertyModalOpen(true)
@@ -39,7 +34,6 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
     }
     setProperties(prev => [...prev, newProperty])
     setIsAddPropertyModalOpen(false)
-    setSelectedPropertyId(newId)
   }
 
   // { SettingsPage }
@@ -93,8 +87,6 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
         <Sidebar 
           user={user} 
           properties={properties} 
-          selectedPropertyId={selectedPropertyId} 
-          onSelectProperty={onSelectProperty} 
           onOpenAddProperty={onOpenAddProperty} 
           onCreateProperty={onCreateProperty}
         />
@@ -106,7 +98,6 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
         <main className={styles.content}>
             <Outlet context={{
               properties,
-              selectedPropertyId,
               onOpenAddProperty,
               services,
               onCreateService,

@@ -47,7 +47,7 @@ function SettingsPage() {
   }
 
   return (
-    <div>
+    <div className={styles.page}>
       <SettingsHeader  
         onOpenAddService={onOpenAddService} 
       />

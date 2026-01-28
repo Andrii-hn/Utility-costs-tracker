@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom"
-import { LayoutDashboard, Home, Receipt } from "lucide-react";
+import { LayoutDashboard, Home } from "lucide-react";
 
 
 import styles from "./Sidebar.module.css"
 
-function Sidebar({ properties, selectedPropertyId, onSelectProperty, onOpenAddProperty }) {
+function Sidebar({ properties, onOpenAddProperty }) {
   const linkClass = ({ isActive }) => 
     `${styles.link} ${isActive ? styles.active : ""}`;
 
@@ -29,15 +29,20 @@ function Sidebar({ properties, selectedPropertyId, onSelectProperty, onOpenAddPr
         <h2 className={styles.title}>Мої об'єкти</h2>
         <div className={styles.properties}>
         {properties.map((property) => (
-            <div
-              key={property.id} 
-              onClick={() => onSelectProperty(property.id)}
-              className={`${styles.item} ${property.id === selectedPropertyId ? styles.itemActive : ''}`}
-              >
-                {property.name}</div>
+          <NavLink 
+            to={`/dashboard/property/${property.id}`} 
+            key={property.id}
+            className={({ isActive }) => 
+              `${styles.item} ${isActive ? styles.itemActive : ''}`
+            }>
+              {property.name}
+          </NavLink>
         ))}
         </div>
-        <button className={styles.addButton} onClick={() => onOpenAddProperty()}>Додати об'єкт</button>
+        <button 
+          className={styles.addButton} 
+          onClick={() => onOpenAddProperty()}
+        >Додати об'єкт</button>
       </div>
     </aside>
   )

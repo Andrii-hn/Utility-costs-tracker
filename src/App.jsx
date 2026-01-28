@@ -8,6 +8,7 @@ import LoginPage from "./pages/Auth/LoginPage"
 import RegistrationPage from "./pages/Auth/RegistrationPage"
 import DashboardPage from './pages/DashboardPage/DashboardPage'
 import SettingsPage from './pages/SettingsPage/SettingsPage'
+import PropertyPage from './pages/PropertyPage/PropertyPage'
 
 import PublicLayout from './components/layout/PublicLayout/PublicLayout'
 import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout'
@@ -128,7 +129,8 @@ function App() {
           } 
         >
           <Route index element={<DashboardPage />} />
-          <Route path='/dashboard/settings' element={<SettingsPage />} />
+          <Route path='settings' element={<SettingsPage />} />
+          <Route path="property/:id" element={<PropertyPage />} />
         </Route>
       </Routes>
   )
