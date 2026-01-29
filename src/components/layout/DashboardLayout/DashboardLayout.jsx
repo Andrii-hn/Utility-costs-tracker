@@ -27,10 +27,16 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
     let id = newId;
     let createdAt = new Date().toISOString();  
 
+    let serviceRecords = {};
+    services.forEach(service => {
+      serviceRecords[service.id] = [];
+    })
+
     let newProperty = {
       id,
       ...formData,
-      createdAt
+      createdAt,
+      serviceRecords
     }
     setProperties(prev => [...prev, newProperty])
     setIsAddPropertyModalOpen(false)

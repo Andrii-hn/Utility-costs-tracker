@@ -1,18 +1,18 @@
 import styles from "./PropertyItem.module.css"
 
-function PropertyItem({ property /* isExpanded, onToggle, onOpen */ }) {
-  // function formatDate(isoString) {
-  //   return new Date(isoString).toLocaleDateString("uk-UA");
-  // }
+function PropertyItem({ property, isExpanded, onToggle, onOpen }) {
+  function formatDate(isoString) {
+    return new Date(isoString).toLocaleDateString("uk-UA");
+  }
   return (
     <>
-      <div className={`${styles.item}`}>
-        <div className={styles.header} >
+      <div className={`${styles.item} ${isExpanded ? styles.active : ""}`}>
+        <div className={styles.header} onClick={onToggle}>
           <p className={styles.name}>{property.name}</p>
           <p className={styles.location}>{property.city}, {property.address}</p>
         </div>
 
-        {/* {onOpen && ( 
+        {onOpen && ( 
           <div>
             <button onClick={onOpen}>Відкрити</button>
           </div>
@@ -27,7 +27,7 @@ function PropertyItem({ property /* isExpanded, onToggle, onOpen */ }) {
               Перейти до витрат
             </button>
           </div>
-        )} */}
+        )}
       </div>
     </>
   )
