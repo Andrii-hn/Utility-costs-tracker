@@ -1,3 +1,87 @@
-.active {
-  color: red;
+/* === Page === */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* === Property section === */
+.propertySection {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* === Tabs section === */
+.tabsSection {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.tab:hover {
+  color: #4f46e5;
+}
+
+.activeTab {
+  color: #4f46e5;
+  border-bottom-color: #4f46e5;
+}
+
+/* === Records section === */
+.recordsSection {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* header */
+.recordsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.recordsTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.addRecordButton {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4f46e5;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer; 
+  transition: background-color 0.15s ease;
+}
+
+.addRecordButton:hover {
+  background-color: #4338ca;
+}
+
+/* Table wrapper */
+.recordsContent {
+  width: 100%;
 }

@@ -87,6 +87,26 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
     );
   }
 
+  function onAddRecord( propertyId, serviceId, record ) {
+    setProperties(prevProperties => 
+      prevProperties.map(property => {
+        if (property.id !== propertyId) {
+          return property;
+        }
+        return {
+          ...property, 
+          serviceRecords: {
+            ...property.serviceRecords, 
+            [serviceId]: [
+              ...(property.serviceRecords?.[serviceId] || []),
+              record
+            ]
+          }
+        };
+      })
+    );
+  }
+
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
@@ -108,7 +128,8 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
               services,
               onCreateService,
               onDeleteService,
-              onUpdateService
+              onUpdateService,
+              onAddRecord
             }}/>
         </main>
 

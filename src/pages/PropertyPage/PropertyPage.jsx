@@ -3,12 +3,14 @@ import { useParams, useOutletContext, useNavigate } from "react-router-dom"
 
 import PropertyDetails from "../../components/dashboard/PropertyDetails/PropertyDetails"
 import Modal from "../../components/layout/DashboardLayout/Modal/Modal";
+import AddRecordForm from "../../components/dashboard/AddRecordForm/AddRecordForm";
+import RecordsTable from "../../components/dashboard/RecordsTable/RecordsTable";
 
 import styles from "./PropertyPage.module.css"
 
 function PropertyPage() {
   const propId = useParams().id;
-  const { properties, services } = useOutletContext();
+  const { properties, services, onAddRecord } = useOutletContext();
   const navigate = useNavigate();
   const [ activeServiceId, setActiveServiceId ] = useState(
     services.length > 0 ? services[0].id : null
@@ -30,71 +32,84 @@ function PropertyPage() {
   }
   
   const serviceRecords = property.serviceRecords || {}
-//   const records = serviceRecords[activeServiceId] || [];   
+  const records = serviceRecords[activeServiceId] || [];   
   const activeService = services.find(service => activeServiceId === service.id)
 
-  const records = [
-    { start: 100, end: 120, amount: 300, date: "2024-01-01" }
-  ]   
+  function handleAddRecord(formData) {
+    let id = records.length === 0 ? 1 : records[records.length - 1].id + 1;
+    
+    const record = {
+      id,
+      startValue: formData.startValue === "" ? null : Number(formData.startValue),
+      endValue: formData.endValue === "" ? null : Number(formData.endValue),
+      amount: Number(formData.amount),
+      date: formData.date,
+      createdAt: new Date().toISOString(),
+    }
+    onAddRecord( property.id, activeServiceId, record )
+    console.log(record)
+  }
 
   return (
-    <div>
-      <PropertyDetails property={property} />
-      {services.length === 0 ? (
-        <div>
-          Спочатку створіть комунальні послуги
+    <div className={styles.page}>
+      <section className={styles.propertySection}>
+        <PropertyDetails property={property} />
+      </section>
+      
+      <section className={styles.tabsSection}>
+        <div className={styles.tabs}>
+          {services.length === 0 ? (
+            <div>
+              Спочатку створіть комунальні послуги
+            </div>
+          ) : (
+            services.map((service) => (
+              <button 
+                key={service.id}
+                className={`${styles.tab} ${activeServiceId === service.id ? styles.activeTab : ""}`}
+                onClick={() => setActiveServiceId(service.id)}
+              >
+                {service.name}
+              </button>  
+            ))
+          )}
         </div>
-      ) : (
-        services.map((service) => (
-          <div 
-            key={service.id}
-            className={`${styles.tab} ${activeServiceId === service.id ? styles.active : ""}`}
-            onClick={() => setActiveServiceId(service.id)}
-          >{service.name}</div>  
-        ))
-      )}
+      </section>
 
-      <button onClick={() => setIsAddRecordModalOpen(true)}>Додати показники</button>
+
+      <section className={styles.recordsSection}>
+        <div className={styles.recordsHeader}>
+          <h2 className={styles.recordsTitle}>
+            Історія показників
+          </h2>
+          <button
+            className={styles.addRecordButton} 
+            onClick={() => setIsAddRecordModalOpen(true)}
+            >
+              Додати показники
+            </button>
+        </div>
+
+        <div className={styles.recordsContent}>
+          <RecordsTable 
+            records={records} 
+            hasMeter={activeService.hasMeter} 
+          />
+        </div>
+      </section>
+
 
       {isAddRecordModalOpen && (
           <Modal>
             <div>Нові показники: {activeService.name}</div>
-            <div>
-              <button>Зберегти</button>
-              <button onClick={() => setIsAddRecordModalOpen(false)}>Скасувати</button>
-            </div>
+            <AddRecordForm 
+              hasMeter={activeService.hasMeter}
+              onSubmit={handleAddRecord}
+              onCancel={() => setIsAddRecordModalOpen(false)}
+            />
           </Modal>
         )
       }
-
-      {records.length === 0 ? (
-        <div>Ще немає показників для цієї послуги</div>
-      ) : (
-        activeService?.hasMeter === false ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Сума</th>
-                <th>Дата</th>
-              </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-          </table>
-        ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Початковий</th>
-                <th>Кінцевий</th>
-                <th>Сума</th>
-                <th>Дата</th>
-              </tr>
-            </thead>
-          </table>
-        )
-      )}
     </div>
   )
 }

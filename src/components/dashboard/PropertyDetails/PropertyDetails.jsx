@@ -14,10 +14,6 @@ function PropertyDetails({ property }) {
           Створено: {new Date(property.createdAt).toLocaleString("uk-UA")}
         </div>
       </div>
-
-      <div className={styles.placeholder}>
-        <p>Тут з'являться комунальні послуги та витрати</p>
-      </div>
     </div>
   )
 }
