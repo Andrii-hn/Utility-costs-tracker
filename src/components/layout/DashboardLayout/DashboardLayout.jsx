@@ -107,6 +107,43 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
     );
   }
 
+  function onUpdateRecord(propertyId, serviceId, updatedRecord) {
+    setProperties(prev => 
+      prev.map(property => {
+        if (property.id !== propertyId) 
+          return property
+        return {
+          ...property, 
+          serviceRecords: {
+            ...property.serviceRecords,
+            [serviceId]: property.serviceRecords[serviceId].map(record => 
+              record.id === updatedRecord.id ? updatedRecord : record
+            )
+          }
+        }
+      })
+    )
+  }
+
+  function onDeleteRecord(propertyId, serviceId, recordId) {
+    setProperties(prev => 
+      prev.map(property => {
+        if (property.id !== propertyId) {
+          return property
+        }
+        return {
+          ...property,
+          serviceRecords: {
+            ...property.serviceRecords,
+            [serviceId]: property.serviceRecords[serviceId].filter(
+              record => record.id !== recordId
+            )
+          }
+        }
+      }) 
+    )
+  }
+
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
@@ -129,7 +166,9 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
               onCreateService,
               onDeleteService,
               onUpdateService,
-              onAddRecord
+              onAddRecord,
+              onUpdateRecord,
+              onDeleteRecord
             }}/>
         </main>
 

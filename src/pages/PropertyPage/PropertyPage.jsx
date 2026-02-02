@@ -10,12 +10,15 @@ import styles from "./PropertyPage.module.css"
 
 function PropertyPage() {
   const propId = useParams().id;
-  const { properties, services, onAddRecord } = useOutletContext();
+  const { properties, services, onAddRecord, onUpdateRecord, onDeleteRecord } = useOutletContext();
   const navigate = useNavigate();
   const [ activeServiceId, setActiveServiceId ] = useState(
     services.length > 0 ? services[0].id : null
   )  
   const [ isAddRecordModalOpen, setIsAddRecordModalOpen ] = useState(false) 
+
+  const [ editingRecord, setEditingRecord ] = useState(null)
+
   const property = properties.find((p) => p.id === Number(propId));
   
   if (!property) {
@@ -35,8 +38,8 @@ function PropertyPage() {
   const records = serviceRecords[activeServiceId] || [];   
   const activeService = services.find(service => activeServiceId === service.id)
 
-  function handleAddRecord(formData) {
-    let id = records.length === 0 ? 1 : records[records.length - 1].id + 1;
+  function handleCreateRecord(formData) {
+    const id = records.length === 0 ? 1 : records[records.length - 1].id + 1;
     
     const record = {
       id,
@@ -47,7 +50,41 @@ function PropertyPage() {
       createdAt: new Date().toISOString(),
     }
     onAddRecord( property.id, activeServiceId, record )
-    console.log(record)
+    handleCloseModal()
+  }
+
+  function handleUpdateRecord(formData) {
+    const updatedRecord = {
+      ...editingRecord,
+      startValue: formData.startValue === "" ? null : Number(formData.startValue),
+      endValue: formData.endValue === "" ? null : Number(formData.endValue),
+      amount: Number(formData.amount),
+      date: formData.date,
+      updatedAt: new Date().toISOString(),
+    }
+    onUpdateRecord(property.id, activeServiceId, updatedRecord)
+  }
+
+  function handleSubmitRecord(formData) {
+    if (editingRecord) {
+      handleUpdateRecord(formData)
+    } else {
+      handleCreateRecord(formData)
+    }
+  }
+
+  function handleDeleteRecord(record) {
+    onDeleteRecord(property.id, activeServiceId, record.id)
+  }
+
+  function handleEditRecord(record) {
+    setEditingRecord(record);
+    setIsAddRecordModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsAddRecordModalOpen(false)
+    setEditingRecord(null)
   }
 
   return (
@@ -84,7 +121,10 @@ function PropertyPage() {
           </h2>
           <button
             className={styles.addRecordButton} 
-            onClick={() => setIsAddRecordModalOpen(true)}
+            onClick={() => {
+              setEditingRecord(null)
+              setIsAddRecordModalOpen(true)
+            }}
             >
               Додати показники
             </button>
@@ -94,6 +134,8 @@ function PropertyPage() {
           <RecordsTable 
             records={records} 
             hasMeter={activeService.hasMeter} 
+            onEdit={handleEditRecord}
+            onDelete={handleDeleteRecord}
           />
         </div>
       </section>
@@ -101,12 +143,15 @@ function PropertyPage() {
 
       {isAddRecordModalOpen && (
           <Modal>
-            <div>Нові показники: {activeService.name}</div>
-            <AddRecordForm 
-              hasMeter={activeService.hasMeter}
-              onSubmit={handleAddRecord}
-              onCancel={() => setIsAddRecordModalOpen(false)}
-            />
+            {(editingRecord !== undefined) && (
+              <AddRecordForm 
+                name={activeService.name}
+                hasMeter={activeService.hasMeter}
+                initialData={editingRecord}
+                onSubmit={handleSubmitRecord}
+                onCancel={handleCloseModal}
+              />              
+            )}
           </Modal>
         )
       }

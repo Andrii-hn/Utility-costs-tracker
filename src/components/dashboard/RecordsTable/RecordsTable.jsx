@@ -1,6 +1,6 @@
 import styles from "./RecordsTable.module.css"
 
-function RecordsTable({ hasMeter, records }) {
+function RecordsTable({ hasMeter, records, onEdit, onDelete }) {
   return (
     <div className={styles.wrapper}>
       {records.length === 0 ? (
@@ -15,6 +15,7 @@ function RecordsTable({ hasMeter, records }) {
               {hasMeter && <th>Кінцевий</th>}
               <th>Сума</th>
               <th>Дата</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -25,6 +26,20 @@ function RecordsTable({ hasMeter, records }) {
                 {hasMeter && <td>{record.endValue}</td>}
                 <td>{record.amount}</td>
                 <td>{record.date}</td>
+                <td className={styles.actions}>
+                  <button 
+                    className={styles.editButton}
+                    onClick={() => onEdit(record)}
+                    > 
+                      Редагувати
+                    </button>
+                  <button 
+                    className={styles.deleteButton}
+                    onClick={() => onDelete(record)}
+                    >
+                      Видалити
+                    </button>
+                </td>
               </tr>
             ))}
           </tbody>
