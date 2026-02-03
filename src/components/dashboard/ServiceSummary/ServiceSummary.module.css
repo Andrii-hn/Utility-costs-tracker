@@ -1,0 +1,29 @@
+.summary {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-top: 1px solid #e5e7eb;
+  background-color: #fafafa;
+}
+
+.period {
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.amount,
+.usage {
+  margin: 4px 0;
+}
+
+.empty {
+  margin-top: 16px;
+  padding: 12px 16px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.warning {
+  margin-top: 8px;
+  color: #92400e;
+  font-size: 0.9rem;
+}

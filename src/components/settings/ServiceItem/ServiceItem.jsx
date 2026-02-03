@@ -7,7 +7,13 @@ function ServiceItem({ service, onRequestDelete, onRequestEdit }) {
       <div className={styles.actions}>
         <div className={styles.checkbox}>
           <label>Показники: </label>
-          <input type="checkbox" checked={service.hasMeter} readOnly />
+          <span style={{
+            color: service.hasMeter ? "#16a34a" : "#dc2626",
+            fontWeight: 600,
+            fontSize: "1.2rem"
+          }}>
+            {service.hasMeter ? "✔" : "✖" }
+          </span>
         </div>
         <button className={styles.updateButton} onClick={() => onRequestEdit(service)}>Редагувати</button>
         <button className={styles.deleteButton} onClick={() => onRequestDelete(service.id)}>Видалити</button>

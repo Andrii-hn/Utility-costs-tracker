@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom"
 import { LayoutDashboard, Home } from "lucide-react";
 
-
 import styles from "./Sidebar.module.css"
 
 function Sidebar({ properties, onOpenAddProperty }) {

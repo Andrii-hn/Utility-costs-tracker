@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { useParams, useOutletContext, useNavigate } from "react-router-dom"
+import { useParams, useOutletContext, useNavigate, Link } from "react-router-dom"
+
+import { calculateServiceSummary } from "../../utils/calcucateServiceSummary";
 
 import PropertyDetails from "../../components/dashboard/PropertyDetails/PropertyDetails"
 import Modal from "../../components/layout/DashboardLayout/Modal/Modal";
 import AddRecordForm from "../../components/dashboard/AddRecordForm/AddRecordForm";
 import RecordsTable from "../../components/dashboard/RecordsTable/RecordsTable";
+import ServiceSummary from "../../components/dashboard/ServiceSummary/ServiceSummary";
 
 import styles from "./PropertyPage.module.css"
 
@@ -37,6 +40,10 @@ function PropertyPage() {
   const serviceRecords = property.serviceRecords || {}
   const records = serviceRecords[activeServiceId] || [];   
   const activeService = services.find(service => activeServiceId === service.id)
+
+  const summary = activeService
+    ? calculateServiceSummary(records, activeService.hasMeter)
+    : null;
 
   function handleCreateRecord(formData) {
     const id = records.length === 0 ? 1 : records[records.length - 1].id + 1;
@@ -86,18 +93,21 @@ function PropertyPage() {
     setIsAddRecordModalOpen(false)
     setEditingRecord(null)
   }
-
+  console.log(activeService?.hasMeter)
   return (
     <div className={styles.page}>
       <section className={styles.propertySection}>
         <PropertyDetails property={property} />
       </section>
-      
+
       <section className={styles.tabsSection}>
         <div className={styles.tabs}>
           {services.length === 0 ? (
-            <div>
-              Спочатку створіть комунальні послуги
+            <div className={styles.empty}>
+              <span>Спочатку створіть комунальні послуги в&nbsp;</span>
+              <Link to="/dashboard/settings" className={styles.settingsLink}>
+                налаштуваннях
+              </Link>
             </div>
           ) : (
             services.map((service) => (
@@ -114,32 +124,35 @@ function PropertyPage() {
       </section>
 
 
-      <section className={styles.recordsSection}>
-        <div className={styles.recordsHeader}>
-          <h2 className={styles.recordsTitle}>
-            Історія показників
-          </h2>
-          <button
-            className={styles.addRecordButton} 
-            onClick={() => {
+      {services.length !== 0 && (
+        <section className={styles.recordsSection}>
+          <div className={styles.recordsHeader}>
+            <h2 className={styles.recordsTitle}>
+              Історія показників
+            </h2>
+            <button
+              className={styles.addRecordButton} 
+              onClick={() => {
               setEditingRecord(null)
               setIsAddRecordModalOpen(true)
-            }}
+              }}
             >
               Додати показники
             </button>
-        </div>
+          </div>
 
-        <div className={styles.recordsContent}>
-          <RecordsTable 
-            records={records} 
-            hasMeter={activeService.hasMeter} 
-            onEdit={handleEditRecord}
-            onDelete={handleDeleteRecord}
-          />
-        </div>
-      </section>
-
+          <div className={styles.recordsContent}>
+            <RecordsTable 
+              records={records} 
+              hasMeter={activeService?.hasMeter} 
+              onEdit={handleEditRecord}
+              onDelete={handleDeleteRecord}
+            />
+          </div>
+        </section>
+      )}
+      
+      <ServiceSummary summary={summary} />
 
       {isAddRecordModalOpen && (
           <Modal>

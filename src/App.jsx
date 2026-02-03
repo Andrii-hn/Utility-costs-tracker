@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 
-import propertiesJson from "./data/dashboard/properties.json"
-
 import LandingPage from "./pages/LandingPage/LandingPage"
 import LoginPage from "./pages/Auth/LoginPage"
 import RegistrationPage from "./pages/Auth/RegistrationPage"
@@ -16,7 +14,10 @@ import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout
 function App() {
   const [properties, setProperties] = useState(() => {
     const stored = localStorage.getItem("properties");
-    return stored ? JSON.parse(stored) : propertiesJson;
+    if (!stored) return []
+    
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) ? parsed : [];
   });
 
   useEffect(() => {
