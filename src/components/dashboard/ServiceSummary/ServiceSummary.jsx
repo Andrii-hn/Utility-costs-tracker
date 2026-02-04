@@ -8,7 +8,7 @@ function ServiceSummary({ summary }) {
       </div>
     )
   }
-  console.log(summary);
+
   return (
     <div className={styles.summary}>
       <p className={styles.period}>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useOutletContext, useNavigate, Link } from "react-router-dom"
 
 import { calculateServiceSummary } from "../../utils/calcucateServiceSummary";
+import { getTotalAmount } from "../../utils/getTotalAmount";
 
 import PropertyDetails from "../../components/dashboard/PropertyDetails/PropertyDetails"
 import Modal from "../../components/layout/DashboardLayout/Modal/Modal";
@@ -93,11 +94,31 @@ function PropertyPage() {
     setIsAddRecordModalOpen(false)
     setEditingRecord(null)
   }
-  console.log(activeService?.hasMeter)
+
+  function getInitialFormData() {
+    if (editingRecord !== null) {
+      return editingRecord
+    } else if (records.length === 0) {
+      return null
+    } else {
+      const lastRecord = records[records.length - 1];
+      return {
+        startValue: lastRecord.endValue
+      }
+    }
+  }
+
+  const initialFormData = getInitialFormData();
+
+  const totalAmountForProperty = getTotalAmount(serviceRecords)
+
   return (
     <div className={styles.page}>
       <section className={styles.propertySection}>
-        <PropertyDetails property={property} />
+        <PropertyDetails 
+          property={property} 
+          totalAmountForProperty={totalAmountForProperty}
+        />
       </section>
 
       <section className={styles.tabsSection}>
@@ -160,7 +181,7 @@ function PropertyPage() {
               <AddRecordForm 
                 name={activeService.name}
                 hasMeter={activeService.hasMeter}
-                initialData={editingRecord}
+                initialData={initialFormData}
                 onSubmit={handleSubmitRecord}
                 onCancel={handleCloseModal}
               />              

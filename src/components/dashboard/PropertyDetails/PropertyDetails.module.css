@@ -17,8 +17,12 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
   transform: translateY(-1px);
 }
-.header {
-  margin-bottom: 16px;
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items:baseline;
+  gap: 24px;
 }
 
 .title {
@@ -32,16 +36,31 @@
   margin-bottom: 16px;
 }
 
+.summary {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.summaryLabel {
+  display: block;
+  font-size: 1rem;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.summaryValue {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.currency {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
 .meta {
   font-size: 0.9rem;
   color: #9ca3af;
-}
-
-.placeholder {
-  max-width: 42rem;
-  padding: 20px;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  color: #6b7280;
-  font-size: 1rem;
 }
