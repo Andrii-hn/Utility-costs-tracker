@@ -19,7 +19,7 @@ function Sidebar({ properties, onOpenAddProperty }) {
           <LayoutDashboard size={18} />
           Огляд
         </NavLink>
-        <NavLink to="/dashboard/settings" className={linkClass}>
+        <NavLink to="/dashboard/service-settings" className={linkClass}>
           <Home size={18} />
           Налаштування послуг
         </NavLink>

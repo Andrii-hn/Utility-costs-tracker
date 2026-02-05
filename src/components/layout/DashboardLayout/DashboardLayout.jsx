@@ -8,7 +8,7 @@ import AddPropertyForm from "../../dashboard/AddPropertyForm/AddPropertyForm"
 import styles from "./DashboardLayout.module.css"
 import Modal from "./Modal/Modal"
 
-function DashboardLayout({ onLogout, user, properties, setProperties }) {
+function DashboardLayout({ onLogout, user, onUpdateUser, onChangePassword, properties, setProperties }) {
   const [isAddPropertyModalOpen, setIsAddPropertyModalOpen] = useState(false)
 
   function onOpenAddProperty() {
@@ -168,7 +168,10 @@ function DashboardLayout({ onLogout, user, properties, setProperties }) {
               onUpdateService,
               onAddRecord,
               onUpdateRecord,
-              onDeleteRecord
+              onDeleteRecord,
+              user,
+              onUpdateUser,
+              onChangePassword
             }}/>
         </main>
 

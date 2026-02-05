@@ -126,7 +126,7 @@ function PropertyPage() {
           {services.length === 0 ? (
             <div className={styles.empty}>
               <span>Спочатку створіть комунальні послуги в&nbsp;</span>
-              <Link to="/dashboard/settings" className={styles.settingsLink}>
+              <Link to="/dashboard/service-settings" className={styles.settingsLink}>
                 налаштуваннях
               </Link>
             </div>

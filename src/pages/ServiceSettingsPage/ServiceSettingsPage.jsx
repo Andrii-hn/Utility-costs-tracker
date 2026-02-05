@@ -7,7 +7,7 @@ import ServicesList from "../../components/settings/ServicesList/ServicesList"
 import Modal from "../../components/layout/DashboardLayout/Modal/Modal"
 import ConfirmDeleteService from "../../components/settings/ConfirmDeleteService/ConfirmDeleteService"
 
-import styles from "./SettingsPage.module.css"
+import styles from "./ServiceSettingsPage.module.css"
 
 function SettingsPage() {
   const { services, onCreateService, onDeleteService, onUpdateService } = useOutletContext()

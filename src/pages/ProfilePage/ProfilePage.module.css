@@ -1,0 +1,97 @@
+.page {
+  max-width: 640px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.4);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.success {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  max-width: fit-content;
+  border: 1px solid transparent;
+  display: flex;
+  line-height: 1;
+  align-items: center;
+  transition: opacity 0.15s ease;
+}
+
+.visible {
+  opacity: 1;
+  color: #065f46;
+  background-color: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.saveButton {
+  background-color: #4f46e5;
+  border: 1px solid transparent;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.saveButton:hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+}

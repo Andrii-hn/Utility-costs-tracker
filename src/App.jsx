@@ -5,8 +5,10 @@ import LandingPage from "./pages/LandingPage/LandingPage"
 import LoginPage from "./pages/Auth/LoginPage"
 import RegistrationPage from "./pages/Auth/RegistrationPage"
 import DashboardPage from './pages/DashboardPage/DashboardPage'
-import SettingsPage from './pages/SettingsPage/SettingsPage'
+import ServiceSettingsPage from './pages/ServiceSettingsPage/ServiceSettingsPage'
 import PropertyPage from './pages/PropertyPage/PropertyPage'
+import ProfilePage from './pages/ProfilePage/ProfilePage'
+import ProfileSettingsPage from './pages/ProfileSettingsPage/ProfileSettingsPage'
 
 import PublicLayout from './components/layout/PublicLayout/PublicLayout'
 import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout'
@@ -77,6 +79,34 @@ function App() {
     setIsAuthenticated(false)
   }
 
+  function onUpdateUser(formData) {
+    setUser(prev => ({
+      ...prev,
+      ...formData
+  }))}
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
+
+  function onChangePassword(formData) {
+    if (formData.currentPassword !== user.password) {
+      return {
+        success: false,
+        error: "Старий пароль введено неправильно"
+      };
+    }
+
+    setUser(prev => ({
+      ...prev, 
+      password : formData.newPassword 
+    }))
+
+    return {
+      success: true
+    };
+  }
+
   return (
       <Routes>
         {/* Public */}
@@ -121,6 +151,8 @@ function App() {
               <DashboardLayout 
                 onLogout={handleLogout} 
                 user={user}
+                onUpdateUser={onUpdateUser}
+                onChangePassword={onChangePassword}
                 properties={properties}
                 setProperties={setProperties}
               />
@@ -130,8 +162,10 @@ function App() {
           } 
         >
           <Route index element={<DashboardPage />} />
-          <Route path='settings' element={<SettingsPage />} />
+          <Route path='service-settings' element={<ServiceSettingsPage />} />
           <Route path="property/:id" element={<PropertyPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="settings" element={<ProfileSettingsPage />} />
         </Route>
       </Routes>
   )
