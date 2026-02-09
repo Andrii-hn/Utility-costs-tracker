@@ -108,6 +108,7 @@ function ProfileSettingsPage() {
               className={styles.input}
               name="currentPassword"
               value={formData.currentPassword}
+              autoComplete="current-password"
               onChange={handleChange}
               />
           </div>
@@ -118,6 +119,7 @@ function ProfileSettingsPage() {
               className={styles.input}
               name="newPassword"
               value={formData.newPassword}
+              autoComplete="new-password"
               onChange={handleChange}
               />
           </div>
@@ -128,6 +130,7 @@ function ProfileSettingsPage() {
               className={styles.input}
               name="confirmPassword"
               value={formData.confirmPassword}
+              autoComplete="new-password"
               onChange={handleChange}
               />
           </div>

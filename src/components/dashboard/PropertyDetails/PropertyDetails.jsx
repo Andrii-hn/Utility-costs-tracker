@@ -1,5 +1,8 @@
 import styles from "./PropertyDetails.module.css"
 
+import { formatDate } from "../../../utils/date"
+import ExpensesByServiceChart from "../ExpensesByServiceChart/ExpensesByServiceChart"
+
 function PropertyDetails({ property, totalAmountForProperty }) {
   
   return (
@@ -23,8 +26,12 @@ function PropertyDetails({ property, totalAmountForProperty }) {
         </div>
 
         <div className={styles.meta}>
-          Створено: {new Date(property.createdAt).toLocaleString("uk-UA")}
+          Створено: {formatDate(property.createdAt)}
         </div>
+
+        {/* <div>
+          <ExpensesByServiceChart />
+        </div> */}
       </div>
     </div>
   )

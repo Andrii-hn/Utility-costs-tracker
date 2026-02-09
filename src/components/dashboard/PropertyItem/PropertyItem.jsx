@@ -1,9 +1,7 @@
 import styles from "./PropertyItem.module.css"
+import { formatDate } from "../../../utils/date"
 
 function PropertyItem({ property, isExpanded, onToggle, onOpen }) {
-  function formatDate(isoString) {
-    return new Date(isoString).toLocaleDateString("uk-UA");
-  }
   return (
     <>
       <div className={`${styles.item} ${isExpanded ? styles.active : ""}`}>

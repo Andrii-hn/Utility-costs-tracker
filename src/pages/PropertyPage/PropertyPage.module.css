@@ -5,8 +5,51 @@
   gap: 24px;
 }
 
+/* === empty === */
+.notFound {
+  max-width: 420px;
+  margin: 80px auto 0;
+  padding: 32px 28px;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.notFoundTitle {
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.notFoundText {
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #6b7280;
+}
+
+.notFoundButton {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.notFoundButton:hover {
+  background-color: #1d4ed8;
+}
+
 /* === Property section === */
 .propertySection {
+  display: flex;
+  gap: 50px;
   background-color: #ffffff;
   border-radius: 16px;
   padding: 20px;
@@ -109,4 +152,18 @@
 /* Table wrapper */
 .recordsContent {
   width: 100%;
+}
+
+/* === Charts section === */
+.chartsSection {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+.chartsSectionTitle {
+  font-size: 1.2rem;
+  margin: 8px;
+  font-weight: 600;
 }

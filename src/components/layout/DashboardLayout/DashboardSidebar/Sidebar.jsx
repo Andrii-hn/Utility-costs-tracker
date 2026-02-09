@@ -27,16 +27,25 @@ function Sidebar({ properties, onOpenAddProperty }) {
       <div className={styles.container}>
         <h2 className={styles.title}>Мої об'єкти</h2>
         <div className={styles.properties}>
-        {properties.map((property) => (
-          <NavLink 
-            to={`/dashboard/property/${property.id}`} 
-            key={property.id}
-            className={({ isActive }) => 
-              `${styles.item} ${isActive ? styles.itemActive : ''}`
-            }>
-              {property.name}
-          </NavLink>
-        ))}
+          {properties.length === 0 ? (
+            <div className={styles.empty}>
+              Cписок порожній. <br />
+              Створіть об'єкт
+            </div>
+          ) : (
+            <>
+              {properties.map((property) => (
+                <NavLink 
+                  to={`/dashboard/property/${property.id}`} 
+                  key={property.id}
+                  className={({ isActive }) => 
+                    `${styles.item} ${isActive ? styles.itemActive : ''}`
+                  }>
+                    {property.name}
+                </NavLink>
+              ))}
+            </>
+          ) }
         </div>
         <button 
           className={styles.addButton} 

@@ -81,6 +81,18 @@
   border-top: 1px solid #e5e7eb;
 }
 
+.empty {
+  padding: 12px 14px;
+  margin: 8px 0 12px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #6b2780;
+  background-color: #f9fafb;
+  border: 1px dashed #e5e7eb;
+  border-radius: 12px;
+  text-align: center;
+}
+
 .item {
   font-size: 1rem;
   position: relative;

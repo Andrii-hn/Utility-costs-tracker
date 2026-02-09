@@ -6,7 +6,7 @@ function Header({ user, onLogout }) {
   return (
     <header className={styles.root}>
       <div className={styles.userArea}>
-        <UserMenu onLogout={onLogout} email={user?.email}/>
+        <UserMenu onLogout={onLogout} email={user?.email} user={user}/>
       </div>
     </header>
   )

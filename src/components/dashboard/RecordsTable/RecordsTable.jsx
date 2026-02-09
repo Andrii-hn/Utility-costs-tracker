@@ -1,5 +1,7 @@
 import styles from "./RecordsTable.module.css"
 
+import { formatDate } from "../../../utils/date"
+
 function RecordsTable({ hasMeter, records, onEdit, onDelete }) {
   return (
     <div className={styles.wrapper}>
@@ -24,8 +26,11 @@ function RecordsTable({ hasMeter, records, onEdit, onDelete }) {
               <tr key={record.id}>
                 {hasMeter && <td>{record.startValue}</td>}
                 {hasMeter && <td>{record.endValue}</td>}
-                <td>{record.amount}</td>
-                <td>{record.date}</td>
+                <td>
+                  {record.amount}
+                  <span className={styles.currency}> ₴</span>
+                </td>
+                <td>{formatDate(record.date)}</td>
                 <td className={styles.actions}>
                   <button 
                     className={styles.editButton}

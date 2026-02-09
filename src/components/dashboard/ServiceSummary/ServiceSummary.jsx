@@ -1,5 +1,7 @@
 import styles from "./ServiceSummary.module.css"
 
+import { formatDate } from "../../../utils/date"
+
 function ServiceSummary({ summary }) {
   if (!summary || summary.fromDate === null) {
     return (
@@ -12,10 +14,12 @@ function ServiceSummary({ summary }) {
   return (
     <div className={styles.summary}>
       <p className={styles.period}>
-        З {summary.fromDate} по {summary.toDate}
+        З {formatDate(summary.fromDate)} по {formatDate(summary.toDate)}
       </p>
       <p className={styles.amount}>
-        Сплачено: <strong>{summary.totalAmount}</strong>
+        Сплачено: 
+        <strong> {summary.totalAmount}</strong>
+        <span className={styles.currency}>₴</span>
       </p>
       {summary.totalUsage !== null && (
         <p className={styles.usage}>

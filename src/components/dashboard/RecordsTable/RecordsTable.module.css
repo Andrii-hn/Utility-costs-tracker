@@ -31,6 +31,12 @@
   border-bottom: 1px solid #f1f5f9;
 }
 
+.currency {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
 .table tr:hover {
   background-color: #f9fafb;
 }

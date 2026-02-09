@@ -9,8 +9,12 @@ import Modal from "../../components/layout/DashboardLayout/Modal/Modal";
 import AddRecordForm from "../../components/dashboard/AddRecordForm/AddRecordForm";
 import RecordsTable from "../../components/dashboard/RecordsTable/RecordsTable";
 import ServiceSummary from "../../components/dashboard/ServiceSummary/ServiceSummary";
+import ExpensesChart from "../../components/dashboard/ExpensesChart/ExpensesChart";
+import { prepareExpensesChartData } from "../../utils/charts";
 
 import styles from "./PropertyPage.module.css"
+import { prepareExpensesByServiceData } from "../../utils/expensesByService";
+import ExpensesByServiceChart from "../../components/dashboard/ExpensesByServiceChart/ExpensesByServiceChart";
 
 function PropertyPage() {
   const propId = useParams().id;
@@ -27,9 +31,15 @@ function PropertyPage() {
   
   if (!property) {
       return (
-          <div>
-        <h1>Об'єкт не знайдено!</h1>
-        <button 
+      <div className={styles.notFound}>
+        <h1 className={styles.notFoundTitle}>
+          Об'єкт не знайдено!
+        </h1>
+        <p className={styles.notFoundText}>
+          Можливо, цей об'єкт було видалено або посилання застаріле.
+        </p>
+        <button
+          className={styles.notFoundButton} 
           onClick={() => navigate(`/dashboard`)}    
           >
           Повернутися до списку
@@ -111,6 +121,10 @@ function PropertyPage() {
   const initialFormData = getInitialFormData();
 
   const totalAmountForProperty = getTotalAmount(serviceRecords)
+  
+  const chartData = prepareExpensesChartData(records);
+
+  const { data, total } = prepareExpensesByServiceData({serviceRecords, services});
 
   return (
     <div className={styles.page}>
@@ -119,6 +133,7 @@ function PropertyPage() {
           property={property} 
           totalAmountForProperty={totalAmountForProperty}
         />
+        <ExpensesByServiceChart data={data} total={total} />
       </section>
 
       <section className={styles.tabsSection}>
@@ -174,6 +189,11 @@ function PropertyPage() {
       )}
       
       <ServiceSummary summary={summary} />
+
+      <section className={styles.chartsSection}>
+        <h3 className={styles.chartsSectionTitle}>Динаміка витрат</h3>
+        <ExpensesChart data={chartData} />
+      </section>
 
       {isAddRecordModalOpen && (
           <Modal>
