@@ -1,17 +1,15 @@
 .card {
   background-color: #ffffff;
   border-radius: 16px;
-  padding: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  width: 100%;
+  padding: 0 16px;
+  /* margin: 0 auto; */
   display: flex;
+  align-items: center;
 }
 
 .chartWrapper {
   position: relative;
-  width: 240px;
-  height: 240px;
-  margin: 0 auto 16px;
 }
 
 .center {

@@ -9,7 +9,9 @@ import Modal from "../../components/layout/DashboardLayout/Modal/Modal";
 import AddRecordForm from "../../components/dashboard/AddRecordForm/AddRecordForm";
 import RecordsTable from "../../components/dashboard/RecordsTable/RecordsTable";
 import ServiceSummary from "../../components/dashboard/ServiceSummary/ServiceSummary";
-import ExpensesChart from "../../components/dashboard/ExpensesChart/ExpensesChart";
+import ExpensesLineChart from "../../components/dashboard/ExpensesChart/LineChart/ExpensesLineChart";
+import ExpensesBarChart from "../../components/dashboard/ExpensesChart/BarChart/BarChart";
+import ExpensesAreaChart from "../../components/dashboard/ExpensesChart/AreaChart/AreaChart";
 import { prepareExpensesChartData } from "../../utils/charts";
 
 import styles from "./PropertyPage.module.css"
@@ -26,6 +28,8 @@ function PropertyPage() {
   const [ isAddRecordModalOpen, setIsAddRecordModalOpen ] = useState(false) 
 
   const [ editingRecord, setEditingRecord ] = useState(null)
+
+  const [ selectedChart, setSelectedChart ] = useState("line")
 
   const property = properties.find((p) => p.id === Number(propId));
   
@@ -126,6 +130,12 @@ function PropertyPage() {
 
   const { data, total } = prepareExpensesByServiceData({serviceRecords, services});
 
+  const charts = {
+    line: <ExpensesLineChart data={chartData} />,
+    bar: <ExpensesBarChart data={chartData} />,
+    area: <ExpensesAreaChart data={chartData} />
+  }
+
   return (
     <div className={styles.page}>
       <section className={styles.propertySection}>
@@ -191,8 +201,21 @@ function PropertyPage() {
       <ServiceSummary summary={summary} />
 
       <section className={styles.chartsSection}>
-        <h3 className={styles.chartsSectionTitle}>Динаміка витрат</h3>
-        <ExpensesChart data={chartData} />
+        <div className={styles.chartsHeader}>
+          <h3 className={styles.chartsTitle}>Динаміка витрат</h3>
+          <div className={styles.selectWrapper}>
+            <select 
+              className={styles.select}
+              value={selectedChart} 
+              onChange={(event) => setSelectedChart(event.target.value)}
+            >
+              <option value="line">Лінійний</option>
+              <option value="bar">Стовпчастий</option>
+              <option value="area">З заливкою</option>
+            </select>
+          </div>
+        </div>
+        {charts[selectedChart]}
       </section>
 
       {isAddRecordModalOpen && (

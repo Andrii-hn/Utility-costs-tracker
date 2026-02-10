@@ -1,10 +1,9 @@
-import { ResponsiveContainer, LineChart, XAxis, YAxis, Line, Tooltip, CartesianGrid } from "recharts"
+import { CartesianGrid, ResponsiveContainer, XAxis, AreaChart, Area, YAxis, Tooltip} from "recharts"
 
-import ExpensesTooltip from "./ExpensesTooltip/ExpensesTooltip"
+import ExpensesTooltip from "../ExpensesTooltip/ExpensesTooltip"
 
-import styles from "./ExpensesChart.module.css"
-
-function ExpensesChart({data}) {
+import styles from "./AreaChart.module.css"
+function ExpensesAreaChart({ data }) {
   if (data.length === 0) {
     return (
       <div className={styles.empty}>
@@ -21,33 +20,30 @@ function ExpensesChart({data}) {
   }
   return (
     <ResponsiveContainer width="100%" height={240}>
-      <LineChart data={data} margin={{ top: 16, right: 12, left: 0, bottom: 8 }}>
-        <CartesianGrid 
-          stroke="#e5e7eb"
-        />
+      <AreaChart data={data} margin={{ top: 16, right: 12, left: 0, bottom: 8 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
         <XAxis 
-          dataKey="date"
-          tickLine={false}
+          dataKey="date" 
+          tickLine={false}  
           tick={{ fontSize: 12, fill: "#6b7280"}}
         />
         <YAxis 
-        //   tickFormatter={(value) => `${value} грн`}
           tickLine={false}
           tick={{ fontSize: 12, fill: "#6b7280"}}
         />
-        <Line 
+        <Area 
           dataKey="amount"
-          type="monotone"
           strokeWidth={2} 
           stroke="#4f46e5"
           activeDot={{ r: 4 }}
+          animationEasing="ease-out"
         />
         <Tooltip 
           content={ExpensesTooltip}
         />
-      </LineChart>
+      </AreaChart>
     </ResponsiveContainer>
-  ) 
+  )
 }
 
-export default ExpensesChart
+export default ExpensesAreaChart
