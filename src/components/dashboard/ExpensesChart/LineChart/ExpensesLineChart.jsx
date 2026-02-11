@@ -21,7 +21,7 @@ function ExpensesLineChart({data}) {
   }
   return (
     <ResponsiveContainer width="100%" height={240}>
-      <LineChart data={data} margin={{ top: 16, right: 12, left: 0, bottom: 8 }}>
+      <LineChart data={data} margin={{ top: 16, right: 12, left: 0, bottom: 8 }} responsive>
         <CartesianGrid 
           stroke="#e5e7eb"
         />

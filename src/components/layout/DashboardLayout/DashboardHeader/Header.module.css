@@ -1,4 +1,5 @@
 .root {
+  width: 100%;
   height: 64px;
   display: flex;
   align-items: center;
@@ -9,4 +10,40 @@
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.toggleButton {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.toggleButton:hover {
+  background-color: #f3f4f6;
+}
+
+.toggleButton:active {
+  transform: scale(0.96);
+}
+
+.toggleButton:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .root {
+    justify-content: space-between;
+  }
+  .toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

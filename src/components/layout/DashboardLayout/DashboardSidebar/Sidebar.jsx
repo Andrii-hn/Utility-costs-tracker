@@ -3,23 +3,36 @@ import { LayoutDashboard, Home } from "lucide-react";
 
 import styles from "./Sidebar.module.css"
 
-function Sidebar({ properties, onOpenAddProperty }) {
+function Sidebar({ properties, onOpenAddProperty, onClose }) {
   const linkClass = ({ isActive }) => 
     `${styles.link} ${isActive ? styles.active : ""}`;
 
   return (
     <aside className={styles.root}>
       <div className={styles.brand}>
-        <NavLink to="/dashboard" end>
+        <NavLink 
+          to="/dashboard" 
+          end 
+          onClick={() => onClose()}
+        >
           Utility-costs-tracker
         </NavLink>
       </div>
       <nav className={styles.nav}>
-        <NavLink to="/dashboard" end className={linkClass}>
+        <NavLink 
+          to="/dashboard" 
+          end 
+          className={linkClass}
+          onClick={() => onClose()}
+        >
           <LayoutDashboard size={18} />
           Огляд
         </NavLink>
-        <NavLink to="/dashboard/service-settings" className={linkClass}>
+        <NavLink 
+          to="/dashboard/service-settings" 
+          className={linkClass}
+          onClick={() => onClose()}  
+        >
           <Home size={18} />
           Налаштування послуг
         </NavLink>

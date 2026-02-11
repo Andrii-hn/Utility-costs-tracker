@@ -10,6 +10,19 @@ import Modal from "./Modal/Modal"
 
 function DashboardLayout({ onLogout, user, onUpdateUser, onChangePassword, properties, setProperties }) {
   const [isAddPropertyModalOpen, setIsAddPropertyModalOpen] = useState(false)
+  const [ isSidebarOpen, setIsSidebarOpen ] = useState(false)
+
+  function openSidebar() {
+    setIsSidebarOpen(true)
+  }
+
+  function closeSidebar() {
+    setIsSidebarOpen(false)
+  }
+
+  function toggleSidebar() {
+    setIsSidebarOpen(prev => !prev)
+  }
 
   function onOpenAddProperty() {
     setIsAddPropertyModalOpen(true)
@@ -144,21 +157,42 @@ function DashboardLayout({ onLogout, user, onUpdateUser, onChangePassword, prope
     )
   }
 
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden"
+      document.documentElement.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+      document.documentElement.style.overflow = ""
+    }
+  },[isSidebarOpen])
+
+
   return (
     <div className={styles.layout}>
-      <aside className={styles.sidebar}>
+      <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ""}`}>
         <Sidebar 
           user={user} 
           properties={properties} 
           onOpenAddProperty={onOpenAddProperty} 
           onCreateProperty={onCreateProperty}
+          isOpen={isSidebarOpen}
+          onClose={closeSidebar}
         />
       </aside>
+      {isSidebarOpen && (
+        <div className={styles.backdrop} onClick={() => closeSidebar()} />
+      )}
       <div className={styles.main}>
         <div className={styles.header}>
-            <Header onLogout={onLogout} user={user}/>
+            <Header 
+              onLogout={onLogout} 
+              user={user}
+              onToggleSidebar={toggleSidebar}  
+            />
         </div>
         <main className={styles.content}>
+          <div className={styles.container}>
             <Outlet context={{
               properties,
               onOpenAddProperty,
@@ -173,6 +207,7 @@ function DashboardLayout({ onLogout, user, onUpdateUser, onChangePassword, prope
               onUpdateUser,
               onChangePassword
             }}/>
+          </div>
         </main>
 
         {isAddPropertyModalOpen && (
