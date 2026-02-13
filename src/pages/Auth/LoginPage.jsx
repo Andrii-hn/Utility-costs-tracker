@@ -15,7 +15,7 @@ function LoginPage({ onLogin }) {
 
         {error && <p className={styles.error}>{error}</p>}
 
-        <form className={styles.form} onSubmit={(event) => {
+        <form className={`${styles.form} ${styles.loginForm}`} onSubmit={(event) => {
           event.preventDefault()
           setError("");
 
@@ -37,9 +37,9 @@ function LoginPage({ onLogin }) {
           
           }
         }>
-          <label>Email: </label>
+          <label style={{ marginBottom: "12px" }}>Email: </label>
           <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} /> <br />
-          <label>Password: </label>
+          <label style={{ marginBottom: "12px" }}>Password: </label>
           <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} /> <br />
           <button type="submit">Увійти</button>
         </form>

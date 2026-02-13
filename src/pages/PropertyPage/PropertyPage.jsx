@@ -219,7 +219,7 @@ function PropertyPage() {
       </section>
 
       {isAddRecordModalOpen && (
-          <Modal>
+          <Modal onClose={() => handleCloseModal()}>
             {(editingRecord !== undefined) && (
               <AddRecordForm 
                 name={activeService.name}

@@ -24,15 +24,19 @@ function RecordsTable({ hasMeter, records, onEdit, onDelete }) {
           <tbody>
             {records.map(record => (
               <tr key={record.id}>
-                {hasMeter && <td>{record.startValue}</td>}
-                {hasMeter && <td>{record.endValue}</td>}
-                <td>
-                  {record.amount}
-                  <span className={styles.currency}> ₴</span>
+                {hasMeter && <td data-label="Початковий">{record.startValue}</td>}
+                {hasMeter && <td data-label="Кінцевий">{record.endValue}</td>}
+                <td data-label="Сума">
+                  <div>
+                    {record.amount}
+                    <span className={styles.currency}> ₴</span>
+                  </div>
                 </td>
-                <td>{formatDate(record.date)}</td>
-                <td className={styles.actions}>
-                  <button 
+                <td data-label="Дата">{formatDate(record.date)}</td>
+                <td 
+                  className={styles.actions}>
+                  <div>
+                    <button 
                     className={styles.editButton}
                     onClick={() => onEdit(record)}
                     > 
@@ -44,6 +48,7 @@ function RecordsTable({ hasMeter, records, onEdit, onDelete }) {
                     >
                       Видалити
                     </button>
+                  </div>
                 </td>
               </tr>
             ))}

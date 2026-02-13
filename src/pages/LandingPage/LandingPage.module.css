@@ -6,3 +6,10 @@
   gap: 80px;
   padding: 40px 0;
 }
+
+@media (max-width: 768px) {
+  .page {
+    padding: 20px 0;
+    gap: 20px;
+  }
+}

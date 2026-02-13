@@ -15,8 +15,10 @@ function ServiceItem({ service, onRequestDelete, onRequestEdit }) {
             {service.hasMeter ? "✔" : "✖" }
           </span>
         </div>
-        <button className={styles.updateButton} onClick={() => onRequestEdit(service)}>Редагувати</button>
-        <button className={styles.deleteButton} onClick={() => onRequestDelete(service.id)}>Видалити</button>
+        <div className={styles.actionsButtons}>
+          <button className={styles.updateButton} onClick={() => onRequestEdit(service)}>Редагувати</button>
+          <button className={styles.deleteButton} onClick={() => onRequestDelete(service.id)}>Видалити</button>
+        </div>
       </div>
     </div>
   )

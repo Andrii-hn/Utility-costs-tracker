@@ -16,16 +16,20 @@
 }
 
 .grid {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+  justify-content: center;
 }
 
 .card {
   padding: 24px;
+  max-width: 400px;
   background-color: #f9fafb;
   border-radius: 12px;
   text-align: center;
+  margin: 0 auto;
   font-size: 1rem;
   line-height: 1.5;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -52,3 +56,32 @@
   font-size: 0.95rem;
   color: #555;
 }
+
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .benefits {
+    padding: 20px 10px;
+  }
+  .title {
+    margin: 0 15px 24px 15px;
+    font-size: 1.7rem;
+  }
+  .card {
+    padding: 12px;
+    margin: 0 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+ 

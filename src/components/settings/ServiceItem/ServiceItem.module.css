@@ -21,6 +21,13 @@
 .actions {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
+}
+
+.actionsButtons {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
 }
 
 .checkbox {
@@ -74,3 +81,11 @@
 .deleteButton:hover {
   background-color: #fecaca;
 }
+
+@media (max-width: 600px) {
+  .row {
+    display: block;
+    margin: 0 auto;
+  }
+}
+

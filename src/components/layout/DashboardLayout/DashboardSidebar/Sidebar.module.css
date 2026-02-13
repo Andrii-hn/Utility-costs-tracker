@@ -33,6 +33,7 @@
 }
 
 .link {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -42,6 +43,11 @@
   text-decoration: none;
   font-size: 0.95rem;
   transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.linkLabel {
+  color: #374151;
+  font-size: 0.95rem;
 }
 
 .link:hover {
@@ -149,4 +155,16 @@
 
 .addButton:active {
   transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+  .root {
+    padding: 16px;
+  }
+  .brand {
+    margin-bottom: 24px;
+  }
+  .nav {
+    gap: 6px;
+  }
 }

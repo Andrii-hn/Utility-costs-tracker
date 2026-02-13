@@ -11,9 +11,19 @@ function Modal({ onClose, children }) {
       }
     }
     document.addEventListener("keydown", handleKeyDown)
+    
+    const originalOverflow = document.body.style.overflow
+    const originalHtmlOverflow = document.documentElement.style.overflow
+
+    document.body.style.overflow = "hidden"
+    document.documentElement.style.overflow = "hidden"
+    
     return () => {
-        document.removeEventListener("keydown", handleKeyDown)
+      document.removeEventListener("keydown", handleKeyDown)
+      document.body.style.overflow = originalOverflow
+      document.documentElement.style.overflow = originalHtmlOverflow
     }
+
   }, [onClose])
 
   return createPortal(

@@ -46,3 +46,13 @@
   left: 0;
   color: #c7d2fe;
 }
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 20px;
+  }
+  .title {
+    font-size: 2rem;
+    margin: 10px 0;
+  }
+}

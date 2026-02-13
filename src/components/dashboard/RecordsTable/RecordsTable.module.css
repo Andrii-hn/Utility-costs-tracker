@@ -48,6 +48,11 @@
   justify-content: flex-end;
 }
 
+.actions div {
+  display: flex;
+  gap: 8px;
+}
+
 .editButton {
   padding: 6px 10px;
   font-size: 0.875rem;
@@ -84,4 +89,47 @@
 
 .deleteButton:active {
   background-color: #fca5a5;
+}
+
+@media (max-width: 660px) {
+  .wrapper {
+    padding: 0 15px;
+  }
+  .table thead {
+    display: none;
+  }
+  .table tr {
+    display: block;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeSlideIn 300ms ease forwards;
+  }
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border: none;
+  }
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 500;
+    color: #6b7280;
+  }
+  .actions {
+    justify-content: flex-start;
+    margin-top: 8px;
+  }
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -25,16 +25,16 @@ function Sidebar({ properties, onOpenAddProperty, onClose }) {
           className={linkClass}
           onClick={() => onClose()}
         >
-          <LayoutDashboard size={18} />
-          Огляд
+          <span className={styles.linkLogo}><LayoutDashboard size={18} /></span>
+          <span className={styles.linkLabel}>Огляд</span>
         </NavLink>
         <NavLink 
           to="/dashboard/service-settings" 
           className={linkClass}
           onClick={() => onClose()}  
         >
-          <Home size={18} />
-          Налаштування послуг
+          <span className={styles.linkLogo}><Home size={18} /></span>
+          <span className={styles.linkLabel}>Налаштування послуг</span>
         </NavLink>
       </nav>
       <div className={styles.container}>

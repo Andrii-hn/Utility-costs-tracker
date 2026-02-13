@@ -20,7 +20,7 @@ function ExpensesByServiceChart({ data, total }) {
   return (
     <div className={styles.card}>
       <div className={styles.chartWrapper}>
-        <ResponsiveContainer width={200} height={200}>
+        <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie 
               data={data}
