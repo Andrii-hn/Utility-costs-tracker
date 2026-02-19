@@ -11,7 +11,7 @@ function Header({ onLoginClick }) {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          Bills & Costs
+          Utility-costs-tracker
         </div>
 
         {!isAuthPage && <button className={styles.loginButton} onClick={onLoginClick}>Увійти</button>}

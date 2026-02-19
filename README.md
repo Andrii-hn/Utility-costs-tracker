@@ -1,16 +1,109 @@
-# React + Vite
+# Utility-costs-tracker
+A full-featured dashboard application for tracking utility expenses across multiple real estate properties.
+The application allows users to manage properties, submit meter readings, analyze expenses through dynamic charts, and customize utility service types.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
+### Authentication
+- User registration and login
+- Protected routes
+- Profile and password settings pages
 
-Currently, two official plugins are available:
+### Dashboard
+- List of real estate properties
+- Add new property via modal form
+- Quick navigation through layout sidebar
+- Dropdown user menu (Profile, Settings, Logout)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Property Details Page
+- Detailed property information
+- Tab-based filtering by utility services
+- CRUD operations for utility readings
+- Modal form for submitting new meter readings
+- Summary statistics:
+  - First and last submission date
+  - Total expenses
+  - Total number of readings
 
-## React Compiler
+### Charts & Analytics
+- 📈 Line chart (Chart.js) — expense dynamics over time
+- 🥧 Pie chart (Chart.js) — percentage distribution of utility costs
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### Utility Services Management
+- Add, edit, delete utility service types
+- Services dynamically rendered as tabs on property page
 
-## Expanding the ESLint configuration
+### UI & UX
+- Responsive design for all screen sizes
+- Modular CSS architecture (CSS Modules)
+- Layout with sidebar navigation and header dropdown
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Tech Stack
+**Frontend**
+- React
+- React Router
+- Chart.js
+
+**Styling**
+- CSS3
+- CSS Modules
+
+**Build Tool**
+- Vite
+
+**Package Manager**
+- npm
+
+---
+
+## Installation & Setup
+
+Clone the repository:
+```bash
+  git clone https://github.com/Andrii-hn/Utility-costs-tracker.git
+  cd utility-costs-tracker
+  npm install
+  npm run dev
+```
+---
+
+Project Structure (Simplified)
+
+```bash
+src/
+ ├── components/
+ ├── pages/
+ ├── data/
+ ├── utils/
+ ├── App.jsx
+ └── main.jsx
+```
+The project follows a component-based architecture with separation of pages, reusable UI components, and layout structure.
+
+## Architecture Overview
+- Protected routes implemented using React Router
+- State managed locally with React hooks
+- Dynamic rendering of utility services
+- Data-driven charts based on submitted readings
+- Modal-based form handling for CRUD operations
+
+## Future Improvements
+- Add backend integration 
+- Implement persistent database storage
+- Add form validation improvements
+- Add unit and integration tests
+- Implement role-based access
+- Add TypeScript
+
+## Screenshots
+![Landing Page](image.png)
+![Dashboard Page](image-1.png)
+![Property Page](image-2.png)
+![ServiceSettings Page](image-3.png)
+
+## 🚀 Live Demo
+https://utility-costs-tracker-app.vercel.app/
+
+## Author
+Andrii Hnylytskyi
